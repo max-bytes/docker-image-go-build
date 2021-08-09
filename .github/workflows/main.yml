@@ -26,7 +26,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: maximiliancsuk/go-build
+          images: maxbytes1/go-build
       - name: Build and push Docker images
         uses: docker/build-push-action@v2
         with:
