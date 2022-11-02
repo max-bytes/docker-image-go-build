@@ -1,15 +1,9 @@
-FROM golang:1.16.5
+FROM golang:1.19.2
 
 RUN apt-get update
-RUN apt-get install -y git golang-glide rpm
-
-# workaround for build error in go 1.16: https://github.com/golang/go/issues/31997
-RUN go env -w GO111MODULE=auto
+RUN apt-get install -y git alien
 
 # install go-bin-rpm
-RUN mkdir -p $GOPATH/src/github.com/mh-cbon/go-bin-rpm && \
-	cd $GOPATH/src/github.com/mh-cbon/go-bin-rpm && \
-	git clone https://github.com/mh-cbon/go-bin-rpm.git . && \
-	glide install && \
-	go install
-
+RUN apt-get install alien && \
+	wget https://github.com/mh-cbon/go-bin-rpm/releases/download/1.0.0/go-bin-rpm-amd64.rpm && \
+	alien -i go-bin-rpm-amd64.rpm
